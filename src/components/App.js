@@ -22,23 +22,27 @@ class App extends React.Component {
       }));
     });
   }
-  updateShelf(book, shelf) {
-    BooksAPI.update(" Jf1vQAACAAJ", " wantToRead").then((book) => {
-      console.log("boooooooooooooooook", book);
+  updateShelf = (book, shelf) => {
+    BooksAPI.update({ id: book }, shelf).then((book) => {
+      this.update();
+    });
+  };
+  update() {
+    BooksAPI.getAll().then((book) => {
       this.setState(() => ({
-        currentlyReading: book.currentlyReading.filter(
+        currentlyReading: book.filter(
           (book) => book.shelf === "currentlyReading"
         ),
-        wantToRead: book.wantToRead.filter(
-          (book) => book.shelf === "wantToRead"
-        ),
-        read: book.read.filter((book) => book.shelf === "read"),
+        wantToRead: book.filter((book) => book.shelf === "wantToRead"),
+        read: book.filter((book) => book.shelf === "read"),
       }));
     });
   }
+
   render() {
     return (
       <div>
+        {/*this.updateShelf("nggnmAEACAAJ", "currentlyReading")*/}
         <Route
           exact
           path="/"
@@ -47,7 +51,6 @@ class App extends React.Component {
               currentlyReading={this.state.currentlyReading}
               wantToRead={this.state.wantToRead}
               read={this.state.read}
-              onUpdateState={this.updateState}
               onUpdateShelf={this.updateShelf}
             />
           )}
@@ -59,6 +62,9 @@ class App extends React.Component {
               books={this.state}
               onsearchBooks={(book) => {
                 this.searchBooks(book);
+              }}
+              onUpdateShelf={(book, shelf) => {
+                this.updateShelf(book, shelf);
                 history.push("/");
               }}
             />

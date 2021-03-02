@@ -18,6 +18,8 @@ class ListBooks extends React.Component {
     const currentlyReading = this.props.currentlyReading;
     const wantToRead = this.props.wantToRead;
     const read = this.props.read;
+    const { onUpdateShelf } = this.props;
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -31,7 +33,6 @@ class ListBooks extends React.Component {
                 <ol className="books-grid">
                   {currentlyReading.map((book) => (
                     <li key={book.id}>
-                      {console.log(book.id)}
                       <div className="book">
                         <div className="book-top">
                           <div
@@ -43,10 +44,15 @@ class ListBooks extends React.Component {
                             }}
                           ></div>
                           <div className="book-shelf-changer">
-                            <select>
-                              <option value="move" disabled>
-                                Move to...
-                              </option>
+                            <select
+                              onChange={(e) =>
+                                onUpdateShelf(
+                                  book.id,
+                                  e.target.value.toString()
+                                )
+                              }
+                            >
+                              <option value="move">Move to...</option>
                               <option value="currentlyReading">
                                 Currently Reading
                               </option>
@@ -56,10 +62,7 @@ class ListBooks extends React.Component {
                             </select>
                           </div>
                         </div>
-                        <div className="book-title">
-                          {book.title}
-                          {book.id}
-                        </div>
+                        <div className="book-title">{book.title}</div>
                         <div className="book-authors">{book.authors}</div>
                       </div>
                     </li>
@@ -84,13 +87,19 @@ class ListBooks extends React.Component {
                             }}
                           ></div>
                           <div className="book-shelf-changer">
-                            <select>
-                              <option value="move" disabled>
-                                Move to...
-                              </option>
+                            <select
+                              onChange={(e) =>
+                                onUpdateShelf(
+                                  book.id,
+                                  e.target.value.toString()
+                                )
+                              }
+                            >
+                              <option value="move">Move to...</option>
                               <option value="currentlyReading">
                                 Currently Reading
                               </option>
+
                               <option value="wantToRead">Want to Read</option>
                               <option value="read">Read</option>
                               <option value="none">None</option>
@@ -122,10 +131,15 @@ class ListBooks extends React.Component {
                             }}
                           ></div>
                           <div className="book-shelf-changer">
-                            <select>
-                              <option value="move" disabled>
-                                Move to...
-                              </option>
+                            <select
+                              onChange={(e) =>
+                                onUpdateShelf(
+                                  book.id,
+                                  e.target.value.toString()
+                                )
+                              }
+                            >
+                              <option value="move">Move to...</option>
                               <option value="currentlyReading">
                                 Currently Reading
                               </option>
