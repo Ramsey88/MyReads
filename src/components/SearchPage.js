@@ -38,6 +38,8 @@ class SearchPage extends React.Component {
     }
   };
   render() {
+    const notfound =
+      "https://store.bookbaby.com/BookShop/CommonControls/BookShopThemes/bookshop/OnePageBookCoverImage.jpg?BookID=BK90012193&ImageType=FrontLarge";
     const { onUpdateShelf } = this.props;
     const query = this.state.query;
     /*const result = [this.searchResult];*/
@@ -65,14 +67,26 @@ class SearchPage extends React.Component {
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
-                        }}
-                      ></div>
+                      {book.imageLinks ? (
+                        <div
+                          className="book-cover"
+                          style={{
+                            width: 128,
+                            height: 193,
+                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
+                          }}
+                        ></div>
+                      ) : (
+                        <div
+                          className="book-cover"
+                          style={{
+                            width: 128,
+                            height: 193,
+                            backgroundImage: `url(${notfound})`,
+                          }}
+                        ></div>
+                      )}
+
                       <div className="book-shelf-changer">
                         <select
                           onChange={(e) =>

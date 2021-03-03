@@ -19,6 +19,8 @@ class ListBooks extends React.Component {
     const wantToRead = this.props.wantToRead;
     const read = this.props.read;
     const { onUpdateShelf } = this.props;
+    const notfound =
+      "https://store.bookbaby.com/BookShop/CommonControls/BookShopThemes/bookshop/OnePageBookCoverImage.jpg?BookID=BK90012193&ImageType=FrontLarge";
 
     return (
       <div className="list-books">
@@ -35,14 +37,25 @@ class ListBooks extends React.Component {
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{
-                              width: 128,
-                              height: 193,
-                              backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
-                            }}
-                          ></div>
+                          {book.imageLinks ? (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
+                              }}
+                            ></div>
+                          ) : (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${notfound})`,
+                              }}
+                            ></div>
+                          )}
                           <div className="book-shelf-changer">
                             <select
                               onChange={(e) =>
@@ -78,14 +91,25 @@ class ListBooks extends React.Component {
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{
-                              width: 128,
-                              height: 193,
-                              backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
-                            }}
-                          ></div>
+                          {book.imageLinks ? (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
+                              }}
+                            ></div>
+                          ) : (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${notfound})`,
+                              }}
+                            ></div>
+                          )}
                           <div className="book-shelf-changer">
                             <select
                               onChange={(e) =>
@@ -122,14 +146,25 @@ class ListBooks extends React.Component {
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
-                          <div
-                            className="book-cover"
-                            style={{
-                              width: 128,
-                              height: 193,
-                              backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
-                            }}
-                          ></div>
+                          {book.imageLinks ? (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
+                              }}
+                            ></div>
+                          ) : (
+                            <div
+                              className="book-cover"
+                              style={{
+                                width: 128,
+                                height: 193,
+                                backgroundImage: `url(${notfound})`,
+                              }}
+                            ></div>
+                          )}
                           <div className="book-shelf-changer">
                             <select
                               onChange={(e) =>
