@@ -21,20 +21,20 @@ class SearchPage extends React.Component {
     this.setState(() => ({
       query: query.trim(),
     }));
+    this.update(query);
   };
   /* componentDidUpdate() {
     if (this.state.bookID !== "")
       this.props.onUpdateShelf(this.state.bookID, this.selectedShelf);
   }*/
-  update = (e) => {
-    e.preventDefault();
-
-    if (this.state.query) {
-      BooksAPI.search(this.state.query).then((book) => {
+  update = (query) => {
+    if (query) {
+      BooksAPI.search(query).then((book) => {
         this.setState(() => ({
           searchResult: book,
         }));
       });
+    } else {
     }
   };
   render() {
@@ -42,25 +42,115 @@ class SearchPage extends React.Component {
       "https://store.bookbaby.com/BookShop/CommonControls/BookShopThemes/bookshop/OnePageBookCoverImage.jpg?BookID=BK90012193&ImageType=FrontLarge";
     const { onUpdateShelf } = this.props;
     const query = this.state.query;
-    /*const result = [this.searchResult];*/
+    const searchKeys = [
+      "Android",
+      "Art",
+      "Artificial Intelligence",
+      "Astronomy",
+      "Austen",
+      "Baseball",
+      "Basketball",
+      "Bhagat",
+      "Biography",
+      "Brief",
+      "Business",
+      "Camus",
+      "Cervantes",
+      "Christie",
+      "Classics",
+      "Comics",
+      "Cook",
+      "Cricket",
+      "Cycling",
+      "Desai",
+      "Design",
+      "Development",
+      "Digital Marketing",
+      "Drama",
+      "Drawing",
+      "Dumas",
+      "Education",
+      "Everything",
+      "Fantasy",
+      "Film",
+      "Finance",
+      "First",
+      "Fitness",
+      "Football",
+      "Future",
+      "Games",
+      "Gandhi",
+      "Homer",
+      "Horror",
+      "Hugo",
+      "Ibsen",
+      "Journey",
+      "Kafka",
+      "King",
+      "Lahiri",
+      "Larsson",
+      "Learn",
+      "Literary Fiction",
+      "Make",
+      "Manage",
+      "Marquez",
+      "Money",
+      "Mystery",
+      "Negotiate",
+      "Painting",
+      "Philosophy",
+      "Photography",
+      "Poetry",
+      "Production",
+      "Programming",
+      "React",
+      "Redux",
+      "River",
+      "Robotics",
+      "Rowling",
+      "Satire",
+      "Science Fiction",
+      "Shakespeare",
+      "Singh",
+      "Swimming",
+      "Tale",
+      "Thrun",
+      "Time",
+      "Tolstoy",
+      "Travel",
+      "Ultimate",
+      "Virtual Reality",
+      "Web Development",
+      "iOS",
+    ];
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/" className="close-search-book">
             search
           </Link>{" "}
-          <form onSubmit={this.update}>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title or author"
-                value={query}
-                onChange={(e) => this.updateQuery(e.target.value)}
-              />
-            </div>
-          </form>
+          {/* <form onSubmit={this.update}>*/}
+          <div className="search-books-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={query}
+              onChange={(e) => this.updateQuery(e.target.value)}
+            />
+          </div>
+          {/*</form>*/}
         </div>
-        {this.state.searchResult ? (
+        {this.state.searchResult.error ? (
+          <div
+            className="search-books-results book-title"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            No result found, try searching for{" "}
+            {searchKeys[Math.floor(Math.random() * searchKeys.length)]}
+          </div>
+        ) : (
           <div className="search-books-results">
             <ol className="books-grid">
               {this.state.searchResult.map((book) => (
@@ -111,8 +201,6 @@ class SearchPage extends React.Component {
               ))}
             </ol>
           </div>
-        ) : (
-          <div></div>
         )}
       </div>
     );
