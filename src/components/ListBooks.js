@@ -8,19 +8,11 @@ class ListBooks extends React.Component {
     onUpdateShelf: PropTypes.func.isRequired,
   };
   render() {
-    /*const currentlyReading = this.props.books.filter(
-      (book) => book.shelf === "currentlyReading"
-    );
-    const wantToRead = this.props.books.filter(
-      (book) => book.shelf === "wantToRead"
-    );
-    const read = this.props.books.filter((book) => book.shelf === "read");*/
     const currentlyReading = this.props.currentlyReading;
     const wantToRead = this.props.wantToRead;
     const read = this.props.read;
     const { onUpdateShelf } = this.props;
-    const notfound =
-      "https://store.bookbaby.com/BookShop/CommonControls/BookShopThemes/bookshop/OnePageBookCoverImage.jpg?BookID=BK90012193&ImageType=FrontLarge";
+    const notfound = "https://i.imgur.com/sJ3CT4V.gif";
 
     return (
       <div className="list-books">
@@ -53,6 +45,9 @@ class ListBooks extends React.Component {
                                 width: 128,
                                 height: 193,
                                 backgroundImage: `url(${notfound})`,
+                                backgroundPosition: "center",
+                                backgroundSize: "contain",
+                                backgroundrepeat: "no-repeat",
                               }}
                             ></div>
                           )}
@@ -107,6 +102,9 @@ class ListBooks extends React.Component {
                                 width: 128,
                                 height: 193,
                                 backgroundImage: `url(${notfound})`,
+                                backgroundPosition: "center",
+                                backgroundSize: "contain",
+                                backgroundrepeat: "no-repeat",
                               }}
                             ></div>
                           )}

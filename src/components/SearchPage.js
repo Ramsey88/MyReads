@@ -5,29 +5,19 @@ import * as BooksAPI from ".././utils/BooksAPI";
 import { PropTypes } from "prop-types";
 
 class SearchPage extends React.Component {
-  /* constructor(props) {
-    super(props);
-    this.onUpdateShelf = this.onUpdateShelf.bind(this);
-  }*/ static protoTypes = {
+  static protoTypes = {
     onUpdateShelf: PropTypes.func.isRequired,
   };
   state = {
     query: "",
     searchResult: [],
-    selectedShelf: "",
     bookID: "",
+    i: 0,
   };
   updateQuery = (query) => {
     this.setState(() => ({
       query: query.trim(),
     }));
-    this.update(query);
-  };
-  /* componentDidUpdate() {
-    if (this.state.bookID !== "")
-      this.props.onUpdateShelf(this.state.bookID, this.selectedShelf);
-  }*/
-  update = (query) => {
     if (query) {
       BooksAPI.search(query).then((book) => {
         this.setState(() => ({
@@ -35,11 +25,22 @@ class SearchPage extends React.Component {
         }));
       });
     } else {
+      this.clearQuery();
     }
   };
+  componentDidMount() {
+    this.setState(() => ({
+      i: 1,
+    }));
+  }
+
+  clearQuery = () => {
+    this.setState(() => ({
+      searchResult: [],
+    }));
+  };
   render() {
-    const notfound =
-      "https://store.bookbaby.com/BookShop/CommonControls/BookShopThemes/bookshop/OnePageBookCoverImage.jpg?BookID=BK90012193&ImageType=FrontLarge";
+    const notfound = "https://i.imgur.com/sJ3CT4V.gif";
     const { onUpdateShelf } = this.props;
     const query = this.state.query;
     const searchKeys = [
@@ -129,7 +130,6 @@ class SearchPage extends React.Component {
           <Link to="/" className="close-search-book">
             search
           </Link>{" "}
-          {/* <form onSubmit={this.update}>*/}
           <div className="search-books-input-wrapper">
             <input
               type="text"
@@ -138,11 +138,12 @@ class SearchPage extends React.Component {
               onChange={(e) => this.updateQuery(e.target.value)}
             />
           </div>
-          {/*</form>*/}
         </div>
-        {this.state.searchResult.error ? (
+        {this.state.i !== 0 &&
+        this.state.searchResult.error &&
+        this.state.searchResult.length !== 0 ? (
           <div
-            className="search-books-results book-title"
+            className="search-books-results book-title "
             style={{
               textAlign: "center",
             }}
@@ -173,6 +174,9 @@ class SearchPage extends React.Component {
                             width: 128,
                             height: 193,
                             backgroundImage: `url(${notfound})`,
+                            backgroundPosition: "center",
+                            backgroundSize: "contain",
+                            backgroundrepeat: "no-repeat",
                           }}
                         ></div>
                       )}
