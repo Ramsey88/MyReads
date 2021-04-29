@@ -1,9 +1,9 @@
 # "Myreads" app
 
-##App description:
+## App description:
 A bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. Also you can search for book and add it to your list.
 
-##Instructions:
+## Instructions:
 
 ### `npm install`
 
